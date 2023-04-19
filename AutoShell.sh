@@ -11,20 +11,31 @@ redaro="\033[0;31m➤ "
 # Backend Variables
 user=$(whoami)
 task=""
+# Check to see if SQL database is setup.
+if [[ ! -f data/database.db ]]; then
+	# If makeSQL.sh has execute permission start makeSQL.sh.
+	if [[ $(ls -l scripts/makeSQL.sh | grep "rwxr-xr-x") = *"-rwxr-xr-x"* ]]; then
+		./scripts/makeSQL.sh
+	# Else makeSQL.sh does not have execute permission give makeSQL.sh execute permission.
+	else
+		chmod +x scripts/makeSQL.sh
+		./scripts/makeSQL.sh
+	fi
+fi
 # When $task is "Quit" stop the loop.
 while [[ !("$task" =~ "Quit") ]]
 do
 	clear
 	echo -e "${bluetxt}
- █████╗ ██╗   ██╗████████╗ ██████╗     ███████╗██╗  ██╗███████╗██╗     ██╗     
-██╔══██╗██║   ██║╚══██╔══╝██╔═══██╗    ██╔════╝██║  ██║██╔════╝██║     ██║     
-███████║██║   ██║   ██║   ██║   ██║    ███████╗███████║█████╗  ██║     ██║     
-██╔══██║██║   ██║   ██║   ██║   ██║    ╚════██║██╔══██║██╔══╝  ██║     ██║     
+ █████╗ ██╗   ██╗████████╗ ██████╗     ███████╗██╗  ██╗███████╗██╗     ██╗
+██╔══██╗██║   ██║╚══██╔══╝██╔═══██╗    ██╔════╝██║  ██║██╔════╝██║     ██║
+███████║██║   ██║   ██║   ██║   ██║    ███████╗███████║█████╗  ██║     ██║
+██╔══██║██║   ██║   ██║   ██║   ██║    ╚════██║██╔══██║██╔══╝  ██║     ██║
 ██║  ██║╚██████╔╝   ██║   ╚██████╔╝    ███████║██║  ██║███████╗███████╗███████╗
 ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝     ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
                                                                                ${cyantxt}
                      A Helper Script For Pen Testing
-                                  v0.1                       "
+                                  v0.1"
 	echo -e "${grenaro}${whitetxt}Hello $user, What type of task would you like to do?"
 	# Selection menu for different tasks.
 	select task in "Nmap Scans" "Brute Force" "Hash Cracking" "Shell Attack" "Quit"
@@ -36,7 +47,7 @@ do
 				sleep 2
 				break
 			# Else nmap.sh does not have execute permission give nmap.sh execute permission.
-			else 
+			else
 				chmod +x scripts/nmap.sh
 				./scripts/nmap.sh
 				break
@@ -48,7 +59,7 @@ do
 				sleep 2
 				break
 			# Else hydra.sh does not have execute permission give hydra.sh execute permission.
-			else 
+			else
 				chmod +x scripts/hydra.sh
 				./scripts/hydra.sh
 				break
@@ -60,7 +71,7 @@ do
 				sleep 2
 				break
 			# Else hashcat.sh does not have execute permission give hashcat.sh execute permission.
-			else 
+			else
 				chmod +x scripts/hashcat.sh
 				./scripts/hashcat.sh
 				break
@@ -72,7 +83,7 @@ do
 				sleep 2
 				break
 			# Else netcat.sh does not have execute permission give netcat.sh execute permission.
-			else 
+			else
 				chmod +x scripts/netcat.sh
 				./scripts/netcat.sh
 				break
