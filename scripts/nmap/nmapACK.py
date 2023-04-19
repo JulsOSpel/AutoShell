@@ -15,7 +15,7 @@ for host in root.iter('host'):
             port_name = port.find('service').attrib.get('name', 'unknown')
             state = port.find('state').attrib['state']
             scantype = 'ACK'
-            c.execute("INSERT INTO nmap VALUES (CAST(? AS TEXT), CAST(? AS TEXT), CAST(? AS TEXT), CAST(? AS TEXT))", (ip, str(portid), str(port_name), str(state), str(scantype)))
+            c.execute("INSERT INTO nmap VALUES (CAST(? AS TEXT), CAST(? AS TEXT), CAST(? AS TEXT), CAST(? AS TEXT), CAST(? AS TEXT))", (ip, str(portid), str(port_name), str(state), str(scantype)))
         elif port.find('state').attrib['state'] == 'filtered':
             portid = port.attrib['portid']
             port_name = port.find('service').attrib.get('name', 'unknown')
