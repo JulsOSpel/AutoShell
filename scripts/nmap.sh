@@ -31,121 +31,121 @@ do
 			if [[ $net == "" ]]; then # If user's input is not valid keep running the menu.
 				continue
 			else
-				# Ask the user what type of nmap scan they would like to do.
-				echo -e "${grenaro}${whitetxt}What type of nmap scan would you like to do?"
-				select task in "TCP SYN Scan (Stealth)" "TCP ACK Scan" "TCP Connect Scan" "Version Scan" "Back To Main Menu"
+				break
+			fi
+		done
+		# Ask the user what type of nmap scan they would like to do.
+		echo -e "${grenaro}${whitetxt}What type of nmap scan would you like to do?"
+		select task in "TCP SYN Scan (Stealth)" "TCP ACK Scan" "TCP Connect Scan" "Version Scan" "Back To Main Menu"
+		do
+			if [[ $task = "TCP SYN Scan (Stealth)" ]]; then
+				# Check if the user is in root.
+				while true
 				do
-					if [[ $task = "TCP SYN Scan (Stealth)" ]]; then
-						# Check if the user is in root.
-						while true
-						do
-							echo -e "${grenaro}${whitetxt}Note: You need to be in root for this scan to work.${nocolor}"
-							sudo echo -e "${grenaro}${whitetxt}Authenticated!" && break
-							sleep 1
-						done
-						# Run the nmap scan in the background.
-						sudo nmap $ip${net} -sS -T3 -oX data.xml &>/dev/null &
-						PID=$!
-						i=1
-						sp="/-\|"
-						echo -e "${grenaro}${whitetxt}scanning..."
-						# Loading animation.
-						echo -n ' '
-						while [ -d /proc/$PID ]
-						do
-							printf "\b${sp:i++%${#sp}:1}"
-							sleep .5
-						done
-						echo ""
-						# Start the xml to database script.
-						python3 scripts/nmap/nmapSYN.py
-						# Remove the xml file.
-						sudo rm data.xml
-						# Let know the user the task is done.
-						echo -e "${grenaro}${whitetxt}Your scan is complete. Going back to main menu..."
-						sleep 4
-						exit
-					elif [[ $task = "TCP ACK Scan" ]]; then
-						# Check if the user is in root.
-						while true
-						do
-							echo -e "${grenaro}${whitetxt}Note: You need to be in root for this scan to work.${nocolor}"
-							sudo echo -e "${grenaro}${whitetxt}Authenticated!" && break
-							sleep 1
-						done
-						# Run the nmap scan in the background.
-						sudo nmap $ip${net} -sA -T3 -oX data.xml &>/dev/null &
-						PID=$!
-						i=1
-						sp="/-\|"
-						echo -e "${grenaro}${whitetxt}scanning..."
-						# Loading animation.elif [[ $task = "Version Scan" ]]; then
-						echo -n ' '
-						while [ -d /proc/$PID ]
-						do
-							printf "\b${sp:i++%${#sp}:1}"
-							sleep .5
-						done
-						echo ""
-						# Start the xml to database script.
-						python3 scripts/nmap/nmapACK.py
-						# Remove the xml file.
-						sudo rm data.xml
-						# Let know the user the task is done.
-						echo -e "${grenaro}${whitetxt}Your scan is complete. Going back to main menu..."
-						sleep 4
-						exit
-					elif [[ $task = "TCP Connect Scan" ]]; then
-						# Run the nmap scan in the background.
-						nmap $ip${net} -sT -oX data.xml &>/dev/null &
-						PID=$!
-						i=1
-						sp="/-\|"
-						echo -e "${grenaro}${whitetxt}scanning..."
-						# Loading animation.
-						echo -n ' '
-						while [ -d /proc/$PID ]
-						do
-							printf "\b${sp:i++%${#sp}:1}"
-							sleep .5
-						done
-						echo ""
-						# Start the xml to database script.
-						python3 scripts/nmap/nmapConnect.py
-						# Remove the xml file.
-						rm data.xml
-						# Let know the user the task is done.
-						echo -e "${grenaro}${whitetxt}Your scan is complete. Going back to main menu..."
-						sleep 4
-						exit
-					elif [[ $task = "Version Scan" ]]; then
-						# Run the nmap scan in the background.
-						nmap $ip${net} -sV -T3 -oX data.xml &>/dev/null &
-						PID=$!
-						i=1
-						sp="/-\|"
-						echo -e "${grenaro}${whitetxt}scanning..."
-						# Loading animation.
-						echo -n ' '
-						while [ -d /proc/$PID ]
-						do
-							printf "\b${sp:i++%${#sp}:1}"
-							sleep .5
-						done
-						echo ""
-						# Start the xml to database script.
-						python3 scripts/nmap/nmapVersion.py
-						# Remove the xml file.
-						rm data.xml
-						# Let know the user the task is done.
-						echo -e "${grenaro}${whitetxt}Your scan is complete. Going back to main menu..."
-						sleep 4
-						exit
-					elif [[ $task = "Back To Main Menu" ]]; then
-						exit
-					fi
+					echo -e "${grenaro}${whitetxt}Note: You need to be in root for this scan to work.${nocolor}"
+					sudo echo -e "${grenaro}${whitetxt}Authenticated!" && break
+					sleep 1
 				done
-					break
+				# Run the nmap scan in the background.
+				sudo nmap $ip${net} -sS -T3 -oX data.xml &>/dev/null &
+				PID=$!
+				i=1
+				sp="/-\|"
+				echo -e "${grenaro}${whitetxt}scanning..."
+				# Loading animation.
+				echo -n ' '
+				while [ -d /proc/$PID ]
+				do
+					printf "\b${sp:i++%${#sp}:1}"
+					sleep .5
+				done
+				echo ""
+				# Start the xml to database script.
+				python3 scripts/nmap/nmapSYN.py
+				# Remove the xml file.
+				sudo rm data.xml
+				# Let know the user the task is done.
+				echo -e "${grenaro}${whitetxt}Your scan is complete. Going back to main menu..."
+				sleep 4
+				exit
+				elif [[ $task = "TCP ACK Scan" ]]; then
+				# Check if the user is in root.
+				while true
+				do
+					echo -e "${grenaro}${whitetxt}Note: You need to be in root for this scan to work.${nocolor}"
+					sudo echo -e "${grenaro}${whitetxt}Authenticated!" && break
+					sleep 1
+				done
+				# Run the nmap scan in the background.
+				sudo nmap $ip${net} -sA -T3 -oX data.xml &>/dev/null &
+				PID=$!
+				i=1
+				sp="/-\|"
+				echo -e "${grenaro}${whitetxt}scanning..."
+				# Loading animation.elif [[ $task = "Version Scan" ]]; then
+				echo -n ' '
+				while [ -d /proc/$PID ]
+				do
+					printf "\b${sp:i++%${#sp}:1}"
+					sleep .5
+				done
+				echo ""
+				# Start the xml to database script.
+				python3 scripts/nmap/nmapACK.py
+				# Remove the xml file.
+				sudo rm data.xml
+				# Let know the user the task is done.
+				echo -e "${grenaro}${whitetxt}Your scan is complete. Going back to main menu..."
+				sleep 4
+				exit
+			elif [[ $task = "TCP Connect Scan" ]]; then
+				# Run the nmap scan in the background.
+				nmap $ip${net} -sT -oX data.xml &>/dev/null &
+				PID=$!
+				i=1
+				sp="/-\|"
+				echo -e "${grenaro}${whitetxt}scanning..."
+				# Loading animation.
+				echo -n ' '
+				while [ -d /proc/$PID ]
+				do
+					printf "\b${sp:i++%${#sp}:1}"
+					sleep .5
+				done
+				echo ""
+				# Start the xml to database script.
+				python3 scripts/nmap/nmapConnect.py
+				# Remove the xml file.
+				rm data.xml
+				# Let know the user the task is done.
+				echo -e "${grenaro}${whitetxt}Your scan is complete. Going back to main menu..."
+				sleep 4
+				exit
+			elif [[ $task = "Version Scan" ]]; then
+				# Run the nmap scan in the background.
+				nmap $ip${net} -sV -T3 -oX data.xml &>/dev/null &
+				PID=$!
+				i=1
+				sp="/-\|"
+				echo -e "${grenaro}${whitetxt}scanning..."
+				# Loading animation.
+				echo -n ' '
+				while [ -d /proc/$PID ]
+				do
+					printf "\b${sp:i++%${#sp}:1}"
+					sleep .5
+				done
+				echo ""
+				# Start the xml to database script.
+				python3 scripts/nmap/nmapVersion.py
+				# Remove the xml file.
+				rm data.xml
+				# Let know the user the task is done.
+				echo -e "${grenaro}${whitetxt}Your scan is complete. Going back to main menu..."
+				sleep 4
+				exit
+			elif [[ $task = "Back To Main Menu" ]]; then
+				break
 			fi
 		done
 	# If the user does not want to do a scan of a subnet.

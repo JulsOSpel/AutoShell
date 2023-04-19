@@ -44,7 +44,6 @@ do
 			# If nmap.sh has execute permission start nmap.sh.
 			if [[ $(ls -l scripts/nmap.sh | grep "rwxr-xr-x") = *"-rwxr-xr-x"* ]]; then
 				./scripts/nmap.sh
-				sleep 2
 				break
 			# Else nmap.sh does not have execute permission give nmap.sh execute permission.
 			else
@@ -56,7 +55,6 @@ do
 			# If hydra.sh has execute permission start hydra.sh.
 			if [[ $(ls -l scripts/hydra.sh | grep "rwxr-xr-x") = *"-rwxr-xr-x"* ]]; then
 				./scripts/hydra.sh
-				sleep 2
 				break
 			# Else hydra.sh does not have execute permission give hydra.sh execute permission.
 			else
@@ -68,7 +66,6 @@ do
 			# If hashcat.sh has execute permission start hashcat.sh.
 			if [[ $(ls -l scripts/hashcat.sh | grep "rwxr-xr-x") = *"-rwxr-xr-x"* ]]; then
 				./scripts/hashcat.sh
-				sleep 2
 				break
 			# Else hashcat.sh does not have execute permission give hashcat.sh execute permission.
 			else
@@ -80,7 +77,6 @@ do
 			# If netcat.sh has execute permission start netcat.sh.
 			if [[ $(ls -l scripts/netcat.sh | grep "rwxr-xr-x") = *"-rwxr-xr-x"* ]]; then
 				./scripts/netcat.sh
-				sleep 2
 				break
 			# Else netcat.sh does not have execute permission give netcat.sh execute permission.
 			else
