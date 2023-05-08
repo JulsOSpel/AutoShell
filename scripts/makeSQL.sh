@@ -17,4 +17,10 @@ CREATE TABLE nmapVersion (
 	state TEXT,
 	servicetype TEXT
 );
+CREATE TABLE hydra (
+	ip TEXT,
+	servicename TEXT,
+	password TEXT,
+	username TEXT
+);
 EOF
