@@ -35,10 +35,10 @@ do
 ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝     ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
                                                                                ${cyantxt}
                      A Helper Script For Pen Testing
-                                  v0.1"
+                                  v0.2"
 	echo -e "${grenaro}${whitetxt}Hello $user, What type of task would you like to do?"
 	# Selection menu for different tasks.
-	select task in "Nmap Scans" "Brute Force" "Hash Cracking" "Shell Attack" "Quit"
+	select task in "Nmap Scans" "Brute Force" "Hash Cracking" "Shell Attack" "Output Data" "Quit"
 	do
 		if [[ "$task" = "Nmap Scans" ]]; then
 			# If nmap.sh has execute permission start nmap.sh.
@@ -82,6 +82,17 @@ do
 			else
 				chmod +x scripts/netcat.sh
 				./scripts/netcat.sh
+				break
+			fi
+		elif [[ "$task" = "Output Data" ]]; then
+			# If output.sh has execute permission start output.sh.
+			if [[ $(ls -l scripts/output.sh | grep "rwxr-xr-x") = *"-rwxr-xr-x"* ]]; then
+				./scripts/output.sh
+				break
+			# Else output.sh does not have execute permission give output.sh execute permission.
+			else
+				chmod +x scripts/output.sh
+				./scripts/output.sh
 				break
 			fi
 		elif [[ "$task" = "Quit" ]]; then
