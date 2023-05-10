@@ -23,4 +23,9 @@ CREATE TABLE hydra (
 	password TEXT,
 	username TEXT
 );
+CREATE TABLE hashcat (
+	password TEXT,
+	hashtype TEXT,
+	hash TEXT
+);
 EOF
