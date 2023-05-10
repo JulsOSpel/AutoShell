@@ -17,6 +17,7 @@ password=()
 touch data/hashcat.potfile
 potfile="data/hashcat.potfile"
 database="data/database.db"
+wordlist=""
 
 while [[ !("$task" =~ "Back To Main Menu") ]]
 do
@@ -48,7 +49,9 @@ do
 	select task in "Dictionary Attack" "Brute-force Attack (can take long)" "Back To Main Menu"
 	do
 		if [[ $task = "Dictionary Attack" ]]; then
-			hashcat -o $potfile --outfile-format 2 -m $ht2 -a 0 $hashitself ./scripts/hashcat/rockyou.txt &>/dev/null &
+			echo -e "${grenaro}${whitetxt}Enter the path to your wordlist."
+			read wordlist
+			hashcat -o $potfile --outfile-format 2 -m $ht2 -a 0 $hashitself $wordlist &>/dev/null &
 			PID=$!
 			i=1
 			sp="/-\|"
@@ -70,7 +73,7 @@ do
 			done < $potfile
 			rm $potfile
 			# Let know the user the task is done.
-			echo -e "${grenaro}${whitetxt}Your scan is complete. Going back to main menu..."
+			echo -e "${grenaro}${whitetxt}Your crack is complete. Going back to main menu..."
 			sleep 4
 			exit
 		elif [[ $task = "Brute-force Attack (can take long)" ]]; then
