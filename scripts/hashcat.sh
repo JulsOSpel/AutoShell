@@ -11,16 +11,17 @@ grenaro="\033[0;32m➤ "
 redaro="\033[0;31m➤ "
 # Backend Variables
 task=""
-hashtype+=("MD5" "SHA3-512" "NTLM")
+hashtype+=("MD5" "SHA3-512" "SHA512(Unix)" "NTLM")
 hashitself=""
 password=()
+touch data/hashcat.potfile
 potfile="data/hashcat.potfile"
 database="data/database.db"
 
 while [[ !("$task" =~ "Back To Main Menu") ]]
 do
 	# Ask for hash
-	echo -e "${grenaro}${whitetxt}Enter the hash value."
+	echo -e "${grenaro}${whitetxt}Enter the hash value or the path to the file containing the value."
 	read hashitself
 	# Ask for hash type
 	echo -e "${grenaro}${whitetxt}What is the hash type?"
@@ -37,12 +38,14 @@ do
 		ht2=0
 	elif [[ $ht1 == "SHA3-512" ]]; then
 		ht2=17600
+	elif [[ $ht1 == "SHA512(Unix)" ]]; then
+		ht2=1800
 	elif [[ $ht1 == "NTLM" ]]; then
 		ht2=1000
 	fi
 	# Ask for the attack mode
 	echo -e "${grenaro}${whitetxt}How would you like to attack it?"
-	select task in "Dictionary Attack" "Brute-force Attack" "Back To Main Menu"
+	select task in "Dictionary Attack" "Brute-force Attack (can take long)" "Back To Main Menu"
 	do
 		if [[ $task = "Dictionary Attack" ]]; then
 			hashcat -o $potfile --outfile-format 2 -m $ht2 -a 0 $hashitself ./scripts/hashcat/rockyou.txt &>/dev/null &
@@ -71,7 +74,7 @@ do
 			sleep 4
 			exit
 		elif [[ $task = "Brute-force Attack (can take long)" ]]; then
-			hashcat -o $potfile --outfile-format 2 -m $ht2 -a 3 $hashitself -1 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ?1?1?1?1?1?1?1  &>/dev/null &
+			hashcat -o $potfile --outfile-format 2 -m $ht2 -a 3 $hashitself -1 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ?1?1?1?1?1?1?1 &>/dev/null &
 			PID=$!
 			i=1
 			sp="/-\|"
