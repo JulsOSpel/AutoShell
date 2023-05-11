@@ -11,13 +11,12 @@ grenaro="\033[0;32m➤ "
 redaro="\033[0;31m➤ "
 # Backend Variables
 task=""
-outputtype+=("Nmap Scans" "Brute Force" "Hash Cracking")
 
 while [[ !("$task" =~ "Back To Main Menu") ]]
 do
 	# Select what to output
 	echo -e "${grenaro}${whitetxt}What would you like to output?"
-	select type in ${outputtype[@]}
+	select type in "Nmap Scans" "Brute Force" "Hash Cracking"
 	do
 		if [[ $type == "" ]]; then # Check valid input
 			continue
