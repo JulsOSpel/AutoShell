@@ -11,7 +11,7 @@ grenaro="\033[0;32m➤ "
 redaro="\033[0;31m➤ "
 # Backend Variables
 task=""
-outputtype+=("Nmap-scans" "Brute-Force" "Hash-Cracking")
+outputtype+=("Nmap Scans" "Brute Force" "Hash Cracking")
 
 while [[ !("$task" =~ "Back To Main Menu") ]]
 do
@@ -31,17 +31,17 @@ do
 	do
 		if [[ $task = "Website" ]]; then
 			# Turn the output into an html file
-			if [[ $type == "Nmap-scans" ]]; then
+			if [[ $type == "Nmap Scans" ]]; then
 				sqlite3 -newline '<br>' -header data/database.db "select * from nmap;" > data/nmapout.html
 				echo -e "${grenaro}${whitetxt}The output was saved to data/nmapout.html"
 				sleep 4
 				exit
-			elif [[ $type == "Brute-Force" ]]; then
+			elif [[ $type == "Brute Force" ]]; then
 				sqlite3 -newline '<br>' -header data/database.db "select * from hydra;" > data/hydraout.html
 				echo -e "${grenaro}${whitetxt}The output was saved to data/hydraout.html"
 				sleep 4
 				exit
-			elif [[ $type == "Hash-Cracking" ]]; then
+			elif [[ $type == "Hash Cracking" ]]; then
 				sqlite3 -newline '<br>' -header data/database.db "select * from hashcat;" > data/hashcatout.html
 				echo -e "${grenaro}${whitetxt}The output was saved to data/hashcatout.html"
 				sleep 4
@@ -49,21 +49,21 @@ do
 			fi
 		elif [[ $task = "Shell" ]]; then
 			# Show output and make txt file
-			if [[ $type == "Nmap-scans" ]]; then
+			if [[ $type == "Nmap Scans" ]]; then
 				sqlite3 -header -box data/database.db "select * from nmap;" > data/nmapout.txt
 				sqlite3 -header -box data/database.db "select * from nmap;"
 				echo -e "This output is saved to data/nmapout.txt"
 				echo -e "${grenaro}${whitetxt}Press any key to exit."
 				read -n 1
 				exit
-			elif [[ $type == "Brute-Force" ]]; then
+			elif [[ $type == "Brute Force" ]]; then
 				sqlite3 -header -box data/database.db "select * from hydra;" > data/hydraout.txt
 				sqlite3 -header -box data/database.db "select * from hydra;"
 				echo -e "This output is saved to data/hydraout.txt"
 				echo -e "${grenaro}${whitetxt}Press any key to exit."
 				read -n 1
 				exit
-			elif [[ $type == "Hash-Cracking" ]]; then
+			elif [[ $type == "Hash Cracking" ]]; then
 				sqlite3 -header -box data/database.db "select * from hashcat;" > data/hashcatout.txt
 				sqlite3 -header -box data/database.db "select * from hashcat;"
 				echo -e "${grenaro}${whitetxt}This output is saved to data/hashcatout.txt"
