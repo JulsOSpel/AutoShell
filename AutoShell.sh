@@ -35,7 +35,7 @@ do
 ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝     ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
                                                                                ${cyantxt}
                      A Helper Script For Pen Testing
-                                  v0.3"
+                                  v0.4"
 	echo -e "${grenaro}${whitetxt}Hello $user, What type of task would you like to do?"
 	# Selection menu for different tasks.
 	select task in "Nmap Scans" "Brute Force" "Hash Cracking" "Shell Attack" "Output Data" "Quit"
