@@ -36,7 +36,7 @@ do
 			echo -e "${grenaro}${whitetxt}Enter the port you want the listener to listen to.${nocolor}"
 			read port
 			# Check if the user inputed data.
-			if [[ $ip = "" || $port = "" ]]; then
+			if [[ $port = "" ]]; then
 				# Get port info.
 				echo -e "${redaro}${redtxt}You did not input a port.${whitetxt}"
 				break
