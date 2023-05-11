@@ -5,8 +5,8 @@ A helper script for common ethical hacking tools.
 * Bruteforce Attacks
 * Hash Cracking
 * Shells
-* Output data to HTML file (WIP)
-* Outdata data to a text file (WIP)
+* Output data to HTML file
+* Outdata data to a text file
 ## Installation
 List of programs that must be installed.
 * nmap
