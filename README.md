@@ -4,7 +4,7 @@ A helper script for common ethical hacking tools.
 * Nmap Scans
 * Bruteforce Attacks
 * Hash Cracking
-* Shells (WIP)
+* Shells
 * Output data to HTML file (WIP)
 * Outdata data to a text file (WIP)
 ## Installation
