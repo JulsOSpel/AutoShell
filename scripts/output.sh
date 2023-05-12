@@ -49,8 +49,12 @@ do
 		elif [[ $task = "Shell" ]]; then
 			# Show output and make txt file
 			if [[ $type == "Nmap Scans" ]]; then
+				echo -e "Nmap scan output."
 				sqlite3 -header -box data/database.db "select * from nmap;" > data/nmapout.txt
 				sqlite3 -header -box data/database.db "select * from nmap;"
+				echo -e "Nmap version scan output."
+				sqlite3 -header -box data/database.db "select * from nmapVersion;" >> data/nmapout.txt
+				sqlite3 -header -box data/database.db "select * from nmapVersion;"
 				echo -e "This output is saved to data/nmapout.txt"
 				echo -e "${grenaro}${whitetxt}Press any key to exit."
 				read -n 1
