@@ -1,4 +1,5 @@
 #!/bin/bash
+# Julian did this whole file
 # Text Format
 bluetxt="\033[1;34m"
 cyantxt="\033[1;36m"

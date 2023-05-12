@@ -1,4 +1,5 @@
 #!/bin/bash
+# Julian did everything but the hashcat part
 # Make folder.
 mkdir -p data
 # Make database and tables.
