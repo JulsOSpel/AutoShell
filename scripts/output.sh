@@ -32,18 +32,24 @@ do
 		if [[ $task = "Website" ]]; then
 			# Turn the output into an html file
 			if [[ $type == "Nmap Scans" ]]; then
-				sqlite3 -newline '<br>' -header data/database.db "select * from nmap;" > data/nmapout.html
+				sqlite3 data/database.db ".headers on" ".mode html"  "select * from nmap;" > data/temp.txt
+				awk 'BEGIN{print "<table>"}{print $0}' data/temp.txt > data/nmapout.html
 				echo -e "${grenaro}${whitetxt}The output was saved to data/nmapout.html"
+				rm data/temp.txt
 				sleep 4
 				exit
 			elif [[ $type == "Brute Force" ]]; then
-				sqlite3 -newline '<br>' -header data/database.db "select * from hydra;" > data/hydraout.html
+				sqlite3 data/database.db ".headers on" ".mode html"  "select * from hydra;" > data/temp.txt
+				awk 'BEGIN{print "<table>"}{print $0}' data/temp.txt > data/hydraout.html
 				echo -e "${grenaro}${whitetxt}The output was saved to data/hydraout.html"
+				rm data/temp.txt
 				sleep 4
 				exit
 			elif [[ $type == "Hash Cracking" ]]; then
-				sqlite3 -newline '<br>' -header data/database.db "select * from hashcat;" > data/hashcatout.html
+				sqlite3 data/database.db ".headers on" ".mode html"  "select * from hashcat;" > data/temp.txt
+				awk 'BEGIN{print "<table>"}{print $0}' data/temp.txt > data/hashcatout.html
 				echo -e "${grenaro}${whitetxt}The output was saved to data/hashcatout.html"
+				rm data/temp.txt
 				sleep 4
 				exit
 			fi
