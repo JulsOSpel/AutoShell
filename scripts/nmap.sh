@@ -32,6 +32,9 @@ do
 	if [[ $intpn =~ ^([yY][eE][sS])$ ]]; then
 		echo yes
 		pn="-Pn"
+	
+	elif [[ $intpn == "" ]]; then
+		echo -e "${redaro}${redtxt}Not a valid input. Doing the scan without -Pn.${whitetxt}"
 	fi
 	# If the user says "yes" then the user will be taken to a subnet scan.
 	if [[ $scantype =~ ^([yY][eE][sS])$ ]]; then
