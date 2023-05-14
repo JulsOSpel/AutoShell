@@ -28,11 +28,10 @@ do
 	read ip
 	# Ask user if the target firewall is blocking ICMP requests.
 	echo -e "${grenaro}${whitetxt}Does your target block ping requests? yes/no"
-	read 
+	read
 	if [[ $intpn =~ ^([yY][eE][sS])$ ]]; then
 		echo yes
 		pn="-Pn"
-	
 	elif [[ $intpn == "" ]]; then
 		echo -e "${redaro}${redtxt}Not a valid input. Doing the scan without -Pn.${whitetxt}"
 	fi
