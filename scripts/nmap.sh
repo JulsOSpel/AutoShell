@@ -1,4 +1,5 @@
 #!/bin/bash
+# Julian did this whole file
 # Text Format
 bluetxt="\033[1;34m"
 cyantxt="\033[1;36m"
@@ -15,6 +16,8 @@ name=""
 task=""
 scantype=""
 subnet+=("/1" "/2" "/3" "/4" "/5" "/6" "/7" "/8" "/9" "/10" "/11" "/12" "/13" "/14" "/15" "/16" "/17" "/18" "/19" "/20" "/21" "/22" "/23" "/24" "/25" "/26" "/27" "/28" "/29" "/30" "/31" "/32" "/34" "/35" "/36")
+intpn=""
+pn=""
 while [[ !("$task" =~ "Back To Main Menu") ]]
 do
 	# Ask the user if they want a full scan of the network or not.
@@ -23,6 +26,13 @@ do
 	# Ask user for the ip of the network needed to be scaned.
 	echo -e "${grenaro}${whitetxt}Enter the IP you want to scan."
 	read ip
+	# Ask user if the target firewall is blocking ICMP requests.
+	echo -e "${grenaro}${whitetxt}Does your target block ping requests? yes/no"
+	read 
+	if [[ $intpn =~ ^([yY][eE][sS])$ ]]; then
+		echo yes
+		pn="-Pn"
+	fi
 	# If the user says "yes" then the user will be taken to a subnet scan.
 	if [[ $scantype =~ ^([yY][eE][sS])$ ]]; then
 		echo -e "${grenaro}${whitetxt}What subnet is the network on?"
@@ -47,7 +57,7 @@ do
 					sleep 1
 				done
 				# Run the nmap scan in the background.
-				sudo nmap $ip${net} -sS -T3 -oX data.xml &>/dev/null &
+				sudo nmap $ip${net} -sS -T3 -oX data.xml $pn &>/dev/null &
 				PID=$!
 				i=1
 				sp="/-\|"
@@ -68,7 +78,7 @@ do
 				echo -e "${grenaro}${whitetxt}Your scan is complete. Going back to main menu..."
 				sleep 4
 				exit
-				elif [[ $task = "TCP ACK Scan" ]]; then
+			elif [[ $task = "TCP ACK Scan" ]]; then
 				# Check if the user is in root.
 				while true
 				do
@@ -77,7 +87,7 @@ do
 					sleep 1
 				done
 				# Run the nmap scan in the background.
-				sudo nmap $ip${net} -sA -T3 -oX data.xml &>/dev/null &
+				sudo nmap $ip${net} -sA -T3 -oX data.xml $pn &>/dev/null &
 				PID=$!
 				i=1
 				sp="/-\|"
@@ -100,7 +110,7 @@ do
 				exit
 			elif [[ $task = "TCP Connect Scan" ]]; then
 				# Run the nmap scan in the background.
-				nmap $ip${net} -sT -oX data.xml &>/dev/null &
+				nmap $ip${net} -sT -oX data.xml $pn &>/dev/null &
 				PID=$!
 				i=1
 				sp="/-\|"
@@ -123,7 +133,7 @@ do
 				exit
 			elif [[ $task = "Version Scan" ]]; then
 				# Run the nmap scan in the background.
-				nmap $ip${net} -sV -T3 -oX data.xml &>/dev/null &
+				nmap $ip${net} -sV -T3 -oX data.xml $pn &>/dev/null &
 				PID=$!
 				i=1
 				sp="/-\|"
@@ -162,7 +172,7 @@ do
 					sleep 1
 				done
 				# Run the nmap scan in the background.
-				sudo nmap $ip -sS -T3 -oX data.xml &>/dev/null &
+				sudo nmap $ip -sS -T3 -oX data.xml $pn &>/dev/null &
 				PID=$!
 				i=1
 				sp="/-\|"
@@ -192,7 +202,7 @@ do
 					sleep 1
 				done
 				# Run the nmap scan in the background.
-				sudo nmap $ip -sA -T3 -oX data.xml &>/dev/null &
+				sudo nmap $ip -sA -T3 -oX data.xml $pn &>/dev/null &
 				PID=$!
 				i=1
 				sp="/-\|"
@@ -215,7 +225,7 @@ do
 				exit
 			elif [[ $task = "TCP Connect Scan" ]]; then
 				# Run the nmap scan in the background.
-				nmap $ip -sT -oX data.xml &>/dev/null &
+				nmap $ip -sT -oX data.xml $pn &>/dev/null &
 				PID=$!
 				i=1
 				sp="/-\|"
@@ -238,7 +248,7 @@ do
 				exit
 			elif [[ $task = "Version Scan" ]]; then
 				# Run the nmap scan in the background.
-				nmap $ip -sV -T3 -oX data.xml &>/dev/null &
+				nmap $ip -sV -T3 -oX data.xml $pn &>/dev/null &
 				PID=$!
 				i=1
 				sp="/-\|"
