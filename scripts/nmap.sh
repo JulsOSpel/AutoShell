@@ -30,7 +30,6 @@ do
 	echo -e "${grenaro}${whitetxt}Does your target block ping requests? yes/no"
 	read intpn
 	if [[ $intpn =~ ^([yY][eE][sS])$ ]]; then
-		echo yes
 		pn="-Pn"
 	elif [[ $intpn == "" ]]; then
 		echo -e "${redaro}${redtxt}Not a valid input. Doing the scan without -Pn.${whitetxt}"
