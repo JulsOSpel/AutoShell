@@ -39,7 +39,7 @@ do
                                   v1.0"
 	echo -e "${grenaro}${whitetxt}Hello $user, What type of task would you like to do?"
 	# Selection menu for different tasks.
-	select task in "Nmap Scans" "Brute Force" "Hash Cracking" "Shell Attack" "Output Data" "Quit"
+	select task in "Nmap Scans" "Brute Force" "Hash Cracking" "Shell Attack" "Shell Attack (Perl)" "Output Data" "Quit"
 	do
 		if [[ "$task" = "Nmap Scans" ]]; then
 			# If nmap.sh has execute permission start nmap.sh.
@@ -85,6 +85,17 @@ do
 				./scripts/netcat.sh
 				break
 			fi
+		 elif [[ "$task" = "Shell Attack (Perl)" ]]; then
+                        # If netcat.sh has execute permission start netcat.sh.
+                        if [[ $(ls -l scripts/netcat.pl | grep "rwxr-xr-x") = *"-rwxr-xr-x"* ]]; then
+                                ./scripts/netcat.pl
+                                break
+                        # Else netcat.sh does not have execute permission give netcat.sh execute permission.
+                        else
+                                chmod +x scripts/netcat.pl
+                                ./scripts/netcat.pl
+                                break
+                        fi
 		elif [[ "$task" = "Output Data" ]]; then
 			# If output.sh has execute permission start output.sh.
 			if [[ $(ls -l scripts/output.sh | grep "rwxr-xr-x") = *"-rwxr-xr-x"* ]]; then
