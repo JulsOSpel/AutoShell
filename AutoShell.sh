@@ -50,7 +50,7 @@ do
 			else
 				chmod +x scripts/nmap.sh
 				./scripts/nmap.sh
-				break;
+				break
 			fi
 		elif [[ "$task" = "Brute Force" ]]; then
 			# If hydra.sh has execute permission start hydra.sh.
